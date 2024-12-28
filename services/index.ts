@@ -1,4 +1,4 @@
-import generateRandomLog from '@utils/generate-log';
+import generateRandomLog from '@/utils/generate-log';
 
 /**
  * 프로젝트 리스트 불러오기
@@ -22,7 +22,7 @@ async function getProjects(apiKey: string): Promise<string[]> {
 }
 
 async function getLogs(projectId: string): Promise<string[]> {
-  console.log({ projectId });
+  console.warn({ projectId });
   return [
     generateRandomLog(),
     generateRandomLog(),
