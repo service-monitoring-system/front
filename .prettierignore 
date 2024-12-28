@@ -1,0 +1,17 @@
+node_modules/
+dist/
+build/
+coverage/
+*.min.js
+*.bundle.js
+*.config.js
+*.cjs
+logs/
+*.log
+.vscode/
+.DS_Store
+.env
+.env.*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
