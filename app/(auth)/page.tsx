@@ -1,12 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import LogContainer from '@/components/log-container';
 import { getProjects } from '@/services';
+import { useScroll } from '@/utils/use-scroll';
 import { useQuery } from '@tanstack/react-query';
 
 export default function Home() {
   const [show, setShow] = useState<boolean>(false);
+  const { enableScroll, disableScroll } = useScroll();
   const { isLoading, data: projects } = useQuery({
     queryKey: ['proejcts'],
     queryFn: () => getProjects('example'),
@@ -15,6 +17,11 @@ export default function Home() {
     console.log({ projectId });
     setShow(true);
   };
+
+  useEffect(() => {
+    if (show) disableScroll();
+    else enableScroll();
+  }, [disableScroll, enableScroll, show]);
 
   return (
     <section>
@@ -48,7 +55,7 @@ export default function Home() {
           ></div>
         )}
         <div
-          className={`h-screen fixed top-0 right-0 bg-white rounded-tl-[30px] rounded-bl-[30px] duration-300 ease-in-out shadow-xl z-[2]`}
+          className={`h-screen fixed top-0 right-0 bg-white rounded-tl-[30px] rounded-bl-[30px] duration-300 ease-in-out shadow-xl z-[2] overflow-scroll`}
           style={{
             width: show ? '90%' : 0,
           }}
